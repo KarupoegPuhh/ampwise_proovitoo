@@ -13,8 +13,12 @@ function NumberField(props: {
   const { value, onChange, type, disabled } = props;
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
     let value_as_number = Number(e.currentTarget.value);
-    if (type === NumberFieldType.Precentage && value_as_number > 100) {
-      value_as_number = 100;
+    if (type === NumberFieldType.Precentage) {
+      if (value_as_number > 100) {
+        value_as_number = 100;
+      } else if (value_as_number < 0) {
+        value_as_number = 0;
+      }
     }
     if (type !== NumberFieldType.Float) {
       value_as_number = Math.round(value_as_number);
