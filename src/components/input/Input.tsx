@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '../ui/button';
 import { Label } from '../ui/label';
+import checkmark from './check-mark.svg';
 import NumberField, { NumberFieldType } from './NumberField';
 import Selector from './Selector';
 import TextField from './TextField';
@@ -149,7 +150,7 @@ function InputWrapper(props: {
               </div>
           )
           :
-          <Button disabled={!valueHasValue()} onClick={handleValueSubmit}>y</Button>
+          <Button disabled={!valueHasValue()} onClick={handleValueSubmit}><img src={checkmark} alt="done"/></Button>
         }
       </div>
     </>
