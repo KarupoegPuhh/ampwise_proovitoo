@@ -3,3 +3,5 @@
 -selektori ikoon kolmnurk
 
 -borderid ära võtta
+
+-responsive
