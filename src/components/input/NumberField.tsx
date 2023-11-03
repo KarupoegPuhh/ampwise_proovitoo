@@ -4,7 +4,7 @@ export enum NumberFieldType {
   Int
 }
 
-function NumberField(props: { type: NumberFieldType }) {
+function NumberField(props: { type: NumberFieldType, disabled: boolean }) {
   return (
     <div>
       Number field
