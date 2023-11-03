@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { Button } from '../ui/button';
 import { Label } from '../ui/label';
 import checkmark from './check-mark.svg';
+import cross from './cross.svg';
+import edit from './Edit.svg';
+import copy from './hour-glass.svg';
 import NumberField, { NumberFieldType } from './NumberField';
 import Selector from './Selector';
 import TextField from './TextField';
@@ -134,23 +137,33 @@ function InputWrapper(props: {
         {state !== InputState.new ?
           (state === InputState.edit ?
               <>
-                <Button onClick={handleValueSubmit}>y</Button>
-                <Button onClick={handleValueCancel}>cancel</Button>
+                <Button onClick={handleValueSubmit} variant="ghost">
+                  <img src={checkmark} alt="done" height="25px"/>
+                </Button>
+                <Button onClick={handleValueCancel} variant="ghost">
+                  <img src={cross} alt="cancel" height="25px"/>
+                </Button>
               </>
               : // InputState.readOnly
               <div className={`flex items-center justify-center gap-4 ${isHovering ? "visible" : "invisible"}`}>
-                <Button onClick={handleEdit}>edit</Button>
-                <Button onClick={() => {
+                <Button onClick={handleEdit} variant="ghost">
+                  <img src={edit} alt="edit" height="25px"/>
+                </Button>
+                <Button variant="ghost" onClick={() => {
                   if (valueHasValue()) {
                     navigator.clipboard.writeText(value as string).then(
                       // value copied. add code here
                     );
                   }
-                }}>copy</Button>
+                }}>
+                  <img src={copy} alt="copy" height="25px"/>
+                </Button>
               </div>
           )
           :
-          <Button disabled={!valueHasValue()} onClick={handleValueSubmit}><img src={checkmark} alt="done"/></Button>
+          <Button disabled={!valueHasValue()} onClick={handleValueSubmit} variant="ghost">
+            <img src={checkmark} alt="done" height="25px" width="25px"/>
+          </Button>
         }
       </div>
     </>
