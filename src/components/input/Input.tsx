@@ -25,7 +25,7 @@ interface InputPropsSelectorStringValues {
 
 type InputProps = InputBaseProps | InputPropsSelectorStringValues;
 
-type InputValue = string | number; //needs changing based on input type
+type InputValue = string | number; //needs changing based on input type. better implementation possible!!!
 
 enum InputState {
   new,
@@ -37,13 +37,12 @@ function Input(props: InputProps) {
   const { type, label } = props;
   const [value, setValue] = useState<InputValue>("");
   const [valueTemp, setValueTemp] = useState<InputValue>("");
-  // let temp_value_before_editing: string | number = "";
   const [state, setState] = useState(InputState.new);
   const readOnly = state === InputState.readOnly;
 
   const handleValueChange = (v: string | number) => {
     setValue(v);
-    if (state === InputState.new) {
+    if (state === InputState.new && type === InputType.Selector) {
       setState(InputState.readOnly);
     }
   }
@@ -84,7 +83,10 @@ function Input(props: InputProps) {
                                 disabled={readOnly}/>;
       break;
     case InputType.PrecentageField :
-      inputElement = <NumberField type={NumberFieldType.Precentage} disabled={readOnly}/>
+      inputElement = <NumberField value={value as number}
+                                  onChange={handleValueChange}
+                                  type={NumberFieldType.Precentage}
+                                  disabled={readOnly}/>
       break;
     default:
       return null;
@@ -136,7 +138,7 @@ function InputWrapper(props: {
               <div className={`flex items-center justify-center gap-4 ${isHovering ? "visible" : "invisible"}`}>
                 <Button onClick={handleEdit}>edit</Button>
                 <Button onClick={() => {
-                  if (value) {
+                  if (value !== undefined && value !== null && value !== "") {
                     navigator.clipboard.writeText(value as string).then(
                       // value copied. add code here
                     );
