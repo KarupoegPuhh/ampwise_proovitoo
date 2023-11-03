@@ -1,16 +1,27 @@
-import { HTMLInputTypeAttribute } from 'react';
+import { FormEvent, HTMLInputTypeAttribute } from 'react';
 import { Input } from "../ui/input";
 
 function TextField(props: {
+  value: string,
+  onChange: (v: string) => void,
   label: string,
   disabled: boolean,
   inputType: HTMLInputTypeAttribute,
   placeholderText?: string
 }) {
-  const { label, inputType, placeholderText } = props;
+  const { value, onChange, label, inputType, disabled, placeholderText } = props;
+
+  const handleChange = (e: FormEvent<HTMLInputElement>) => {
+    onChange(e.currentTarget.value);
+  }
 
   return (
-    <Input type={inputType} id={`id_${label}`} placeholder={placeholderText}/>
+    <Input value={value}
+           onInput={(e) => handleChange(e)}
+           type={inputType}
+           id={`id_${label}`}
+           disabled={disabled}
+           placeholder={placeholderText}/>
   );
 }
 

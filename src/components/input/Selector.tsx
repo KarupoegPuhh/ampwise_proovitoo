@@ -1,10 +1,16 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
-function Selector(props: { values: string[], disabled: boolean, placeholderText?: string }) {
-  const { values, disabled, placeholderText } = props;
+function Selector(props: {
+  values: string[],
+  selectedValue: string,
+  onChange: (v: string) => void,
+  disabled: boolean,
+  placeholderText?: string
+}) {
+  const { values, selectedValue, onChange, disabled, placeholderText } = props;
 
   return (
-    <Select disabled={disabled}>
+    <Select disabled={disabled} value={selectedValue} onValueChange={onChange}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder={placeholderText}/>
       </SelectTrigger>
