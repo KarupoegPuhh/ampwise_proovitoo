@@ -131,40 +131,48 @@ function InputWrapper(props: {
 
   return (
     <>
-      <div className="flex items-stretch gap-4" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-        <Label className="font-bold float-left flex items-center justify-center" htmlFor={`id_${label}`}>{label}</Label>
-        <div className="float-right">{props.inputElement}</div>
-        {state !== InputState.new ?
-          (state === InputState.edit ?
-              <>
-                <Button onClick={handleValueSubmit} variant="ghost">
-                  <img src={checkmark} alt="done" height="25px"/>
-                </Button>
-                <Button onClick={handleValueCancel} variant="ghost">
-                  <img src={cross} alt="cancel" height="25px"/>
-                </Button>
-              </>
-              : // InputState.readOnly
-              <div className={`flex items-center justify-center gap-4 ${isHovering ? "visible" : "invisible"}`}>
-                <Button onClick={handleEdit} variant="ghost">
-                  <img src={edit} alt="edit" height="25px"/>
-                </Button>
-                <Button variant="ghost" onClick={() => {
-                  if (valueHasValue()) {
-                    navigator.clipboard.writeText(value as string).then(
-                      // value copied. add code here
-                    );
-                  }
-                }}>
-                  <img src={copy} alt="copy" height="25px"/>
-                </Button>
-              </div>
-          )
-          :
-          <Button disabled={!valueHasValue()} onClick={handleValueSubmit} variant="ghost">
-            <img src={checkmark} alt="done" height="25px" width="25px"/>
-          </Button>
-        }
+      <div className="flex items-start justify-between gap-4 w-full"
+           onMouseOver={handleMouseOver}
+           onMouseOut={handleMouseOut}>
+        <div className="flex items-center justify-between w-full">
+          <Label className="font-bold float-left flex items-center justify-center" htmlFor={`id_${label}`}>
+            {label}
+          </Label>
+          <div className="float-right">{props.inputElement}</div>
+        </div>
+        <div className="float-right w-80">
+          {state !== InputState.new ?
+            (state === InputState.edit ?
+                <>
+                  <Button onClick={handleValueSubmit} variant="ghost">
+                    <img src={checkmark} alt="done" height="25px"/>
+                  </Button>
+                  <Button onClick={handleValueCancel} variant="ghost">
+                    <img src={cross} alt="cancel" height="25px"/>
+                  </Button>
+                </>
+                : // InputState.readOnly
+                <div className={`${isHovering ? "visible" : "invisible"}`}>
+                  <Button onClick={handleEdit} variant="ghost">
+                    <img src={edit} alt="edit" height="25px"/>
+                  </Button>
+                  <Button variant="ghost" onClick={() => {
+                    if (valueHasValue()) {
+                      navigator.clipboard.writeText(value as string).then(
+                        // value copied. add code here
+                      );
+                    }
+                  }}>
+                    <img src={copy} alt="copy" height="25px"/>
+                  </Button>
+                </div>
+            )
+            :
+            <Button disabled={!valueHasValue()} onClick={handleValueSubmit} variant="ghost">
+              <img src={checkmark} alt="done" height="25px" width="25px"/>
+            </Button>
+          }
+        </div>
       </div>
     </>
   );
