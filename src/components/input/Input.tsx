@@ -9,7 +9,7 @@ export enum InputType {
 } // can add more NumberField types like float and int when needed (see NumberFieldType)
 
 function Input(props: { label: string, type: InputType }) {
-  const { type } = props;
+  const { type, label } = props;
 
   let inputElement: JSX.Element;
   switch (type) {
@@ -17,7 +17,7 @@ function Input(props: { label: string, type: InputType }) {
       inputElement = <Selector/>;
       break;
     case InputType.TextField :
-      inputElement = <TextField/>;
+      inputElement = <TextField label={label} inputType="text"/>;
       break;
     case InputType.PrecentageField :
       inputElement = <NumberField type={NumberFieldType.Precentage}/>
