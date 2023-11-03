@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Label } from '../ui/label';
 import NumberField, { NumberFieldType } from './NumberField';
 import Selector from './Selector';
 import TextField from './TextField';
@@ -27,15 +29,30 @@ function Input(props: { label: string, type: InputType }) {
   }
 
   return (
-    <InputWrapper inputElement={inputElement}/>
+    <InputWrapper label={label} inputElement={inputElement}/>
   );
 }
 
-function InputWrapper(props: { inputElement: JSX.Element }) {
+function InputWrapper(props: { inputElement: JSX.Element, label: string }) {
+  const { label } = props;
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseOver = () => {
+    setIsHovering(true);
+    console.log("mouse in")
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+
   return (
     <>
-      {props.inputElement}
-      Input Edit
+      <div className="flex items-stretch gap-4" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+        <Label className="font-bold float-left flex items-center justify-center" htmlFor={`id_${label}`}>{label}</Label>
+        {props.inputElement}
+        <p className={`flex items-center justify-center ${isHovering ? "visible" : "invisible"}`}>edit</p>
+      </div>
     </>
   );
 }
