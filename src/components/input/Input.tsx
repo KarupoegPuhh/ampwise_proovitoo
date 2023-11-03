@@ -123,6 +123,8 @@ function InputWrapper(props: {
     setIsHovering(false);
   };
 
+  const valueHasValue = () => value !== undefined && value !== null && value !== "";
+
   return (
     <>
       <div className="flex items-stretch gap-4" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
@@ -138,7 +140,7 @@ function InputWrapper(props: {
               <div className={`flex items-center justify-center gap-4 ${isHovering ? "visible" : "invisible"}`}>
                 <Button onClick={handleEdit}>edit</Button>
                 <Button onClick={() => {
-                  if (value !== undefined && value !== null && value !== "") {
+                  if (valueHasValue()) {
                     navigator.clipboard.writeText(value as string).then(
                       // value copied. add code here
                     );
@@ -147,7 +149,7 @@ function InputWrapper(props: {
               </div>
           )
           :
-          <Button onClick={handleValueSubmit}>y</Button>
+          <Button disabled={!valueHasValue()} onClick={handleValueSubmit}>y</Button>
         }
       </div>
     </>

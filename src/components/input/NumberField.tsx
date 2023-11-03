@@ -16,6 +16,9 @@ function NumberField(props: {
     if (type === NumberFieldType.Precentage && value_as_number > 100) {
       value_as_number = 100;
     }
+    if (type !== NumberFieldType.Float) {
+      value_as_number = Math.round(value_as_number);
+    } // can change logic of what is allowed with each NumberFieldType
     onChange(value_as_number);
   }
 
