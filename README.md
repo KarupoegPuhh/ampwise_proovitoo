@@ -5,5 +5,3 @@
 -borderid ära võtta
 
 -responsive
-
--storybook täiendada
