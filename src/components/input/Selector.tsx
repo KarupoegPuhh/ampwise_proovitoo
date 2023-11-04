@@ -11,7 +11,7 @@ function Selector(props: {
 
   return (
     <Select disabled={disabled} value={selectedValue} onValueChange={onChange}>
-      <SelectTrigger>
+      <SelectTrigger className="w-full">
         <SelectValue placeholder={placeholderText}/>
       </SelectTrigger>
       <SelectContent>
