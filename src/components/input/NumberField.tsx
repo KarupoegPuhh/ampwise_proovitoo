@@ -26,8 +26,18 @@ function NumberField(props: {
     onChange(value_as_number);
   }
 
+  //Percentage
   return (
-    <Input max={100} type="number" value={value} onInput={(e) => handleChange(e)} disabled={disabled}/>
+    <>
+      <Input max={100}
+             min={0}
+             type="number"
+             value={value}
+             onInput={(e) => handleChange(e)}
+             disabled={disabled}
+             placeholder="%"
+      />
+    </>
   );
 }
 
