@@ -138,7 +138,9 @@ function InputWrapper(props: {
           <Label className="font-bold float-left flex items-center justify-center" htmlFor={`id_${label}`}>
             {label}
           </Label>
-          <div className="float-right">{props.inputElement}</div>
+          <div className="float-right w-200">
+            {props.inputElement}
+          </div>
         </div>
         <div className="float-right w-80">
           {state !== InputState.new ?
